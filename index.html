@@ -1,0 +1,759 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AICommandHub — Turning AI Into Impact</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=DM+Sans:wght@300;400;500;600&family=Cormorant+Garamond:wght@300;400;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --espresso: #2C1810;
+    --espresso-mid: #4A2E1A;
+    --espresso-light: #6B4226;
+    --beige: #F2E8DA;
+    --beige-warm: #EAD9C4;
+    --beige-deep: #D4B896;
+    --copper: #A0522D;
+    --copper-light: #C47A45;
+    --cream: #FDF6EE;
+    --text-dark: #1A0F08;
+    --text-mid: #4A2E1A;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--cream);
+    color: var(--text-dark);
+    overflow-x: hidden;
+  }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 100vh;
+    background: var(--espresso);
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 60px 24px 80px;
+    overflow: hidden;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 70% 60% at 50% 20%, rgba(164,82,45,0.18) 0%, transparent 70%),
+      radial-gradient(ellipse 40% 40% at 80% 80%, rgba(107,66,38,0.22) 0%, transparent 60%);
+    pointer-events: none;
+  }
+
+  .hero-grain {
+    position: absolute;
+    inset: 0;
+    opacity: 0.04;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    background-size: 200px;
+    pointer-events: none;
+  }
+
+  .logo-area {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 48px;
+    animation: fadeUp 0.9s ease both;
+  }
+
+  .logo-circle {
+    width: 220px;
+    height: 220px;
+    border-radius: 50%;
+    border: 2px solid var(--copper);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .logo-circle img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .brand-name {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2rem, 8vw, 3.8rem);
+    font-weight: 700;
+    color: var(--beige);
+    letter-spacing: -0.01em;
+    text-align: center;
+    line-height: 1.1;
+  }
+
+  .brand-name span {
+    color: var(--copper-light);
+  }
+
+  .brand-tagline {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.78rem;
+    font-weight: 500;
+    letter-spacing: 0.28em;
+    color: var(--beige-deep);
+    text-transform: uppercase;
+    margin-top: 4px;
+  }
+
+  .hero-divider {
+    width: 48px;
+    height: 1px;
+    background: var(--copper);
+    margin: 0 auto 32px;
+    animation: fadeUp 1s 0.2s ease both;
+  }
+
+  .hero-bio {
+    max-width: 600px;
+    text-align: center;
+    animation: fadeUp 1s 0.3s ease both;
+  }
+
+  .hero-bio h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(1.2rem, 4vw, 1.6rem);
+    font-weight: 300;
+    color: var(--beige);
+    line-height: 1.55;
+    margin-bottom: 20px;
+  }
+
+  .hero-bio p {
+    font-size: 0.93rem;
+    color: var(--beige-deep);
+    line-height: 1.75;
+    margin-bottom: 14px;
+    font-weight: 300;
+  }
+
+  .hero-bio .highlight {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.1rem;
+    font-style: italic;
+    color: var(--copper-light);
+    font-weight: 400;
+  }
+
+  .scroll-cue {
+    margin-top: 52px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    animation: fadeUp 1s 0.6s ease both;
+  }
+
+  .scroll-cue span {
+    font-size: 0.72rem;
+    letter-spacing: 0.2em;
+    color: var(--beige-deep);
+    text-transform: uppercase;
+  }
+
+  .scroll-arrow {
+    width: 20px;
+    height: 20px;
+    border-right: 1.5px solid var(--copper);
+    border-bottom: 1.5px solid var(--copper);
+    transform: rotate(45deg);
+    animation: bounce 1.6s infinite;
+  }
+
+  /* ── SERVICES SECTION ── */
+  .services {
+    background: var(--beige);
+    padding: 80px 24px;
+  }
+
+  .section-label {
+    text-align: center;
+    margin-bottom: 48px;
+  }
+
+  .section-label h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.8rem, 5vw, 2.8rem);
+    font-weight: 700;
+    color: var(--espresso);
+    margin-bottom: 8px;
+  }
+
+  .section-label p {
+    font-size: 0.88rem;
+    color: var(--espresso-light);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+
+  .thin-line {
+    width: 40px;
+    height: 2px;
+    background: var(--copper);
+    margin: 12px auto 0;
+  }
+/* ── TABS ── */
+.tabs-wrapper {
+  max-width: 860px;
+  margin: 0 auto;
+}
+
+.tab-buttons {
+  display: flex;
+  gap: 10px; /* space between boxes */
+  margin-bottom: 32px;
+
+  border: none;
+  background: transparent;
+  overflow: visible;
+}
+
+.tab-btn {
+  flex: 1;
+  padding: 16px 10px;
+
+  border: 1.5px solid var(--espresso-mid);
+  border-radius: 14px;
+
+  background: var(--espresso);
+
+  cursor: pointer;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.82rem;
+  font-weight: 500;
+
+  color: var(--beige-deep);
+  letter-spacing: 0.04em;
+
+  transition: all 0.35s ease;
+
+  position: relative;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+}
+
+.tab-btn .tab-icon {
+  font-size: 1.4rem;
+}
+
+.tab-btn .tab-title {
+  font-weight: 600;
+  font-size: 0.85rem;
+}
+
+.tab-btn .tab-sub {
+  font-size: 0.68rem;
+  opacity: 0.65;
+  text-align: center;
+  line-height: 1.3;
+  letter-spacing: 0;
+}
+
+.tab-btn.active {
+  background: var(--copper);
+  color: var(--cream);
+}
+
+.tab-btn.active .tab-sub {
+  opacity: 0.85;
+}
+  
+  .tab-btn + .tab-btn {
+    border-left: 1px solid rgba(242,232,218,0.12);
+  }
+
+
+  /* ── TAB PANELS ── */
+  .tab-panel {
+    display: none;
+    background: var(--espresso);
+    border-radius: 18px;
+    padding: 40px 32px;
+    animation: slideIn 0.4s ease;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .tab-panel::before {
+    content: '';
+    position: absolute;
+    top: -60px; right: -60px;
+    width: 200px; height: 200px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(164,82,45,0.2) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .tab-panel.active { display: block; }
+
+  .panel-header {
+    margin-bottom: 32px;
+  }
+
+  .panel-header .panel-badge {
+    display: inline-block;
+    padding: 4px 14px;
+    border-radius: 100px;
+    border: 1px solid var(--copper);
+    font-size: 0.7rem;
+    color: var(--copper-light);
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    margin-bottom: 14px;
+  }
+
+  .panel-header h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.4rem, 4vw, 2rem);
+    font-weight: 700;
+    color: var(--beige);
+    line-height: 1.2;
+    margin-bottom: 8px;
+  }
+
+  .panel-header p {
+    font-size: 0.88rem;
+    color: var(--beige-deep);
+    font-weight: 300;
+  }
+
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 14px;
+    margin-bottom: 32px;
+  }
+
+  .service-card {
+    background: rgba(242,232,218,0.06);
+    border: 1px solid rgba(196,122,69,0.25);
+    border-radius: 12px;
+    padding: 18px 16px;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .service-card::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 2px;
+    background: var(--copper);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.3s ease;
+  }
+
+  .service-card:hover {
+    background: rgba(164,82,45,0.12);
+    border-color: var(--copper);
+    transform: translateY(-2px);
+  }
+
+  .service-card:hover::after { transform: scaleX(1); }
+
+  .service-card .s-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.8rem;
+    font-weight: 300;
+    color: rgba(196,122,69,0.3);
+    line-height: 1;
+    margin-bottom: 8px;
+  }
+
+  .service-card h4 {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--beige);
+    line-height: 1.35;
+  }
+
+  .panel-cta {
+    text-align: center;
+    padding-top: 24px;
+    border-top: 1px solid rgba(242,232,218,0.1);
+  }
+
+  .panel-cta p {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1rem;
+    font-style: italic;
+    color: var(--copper-light);
+    margin-bottom: 12px;
+  }
+
+  .cta-dm {
+    display: inline-block;
+    padding: 12px 28px;
+    background: var(--copper);
+    color: var(--cream);
+    text-decoration: none;
+    border-radius: 100px;
+    font-size: 0.83rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    transition: all 0.3s ease;
+  }
+
+  .cta-dm:hover {
+    background: var(--espresso-light);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.3);
+  }
+
+  /* ── CONTACT ── */
+  .contact {
+    background: var(--espresso);
+    padding: 80px 24px;
+    text-align: center;
+  }
+
+  .contact h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.8rem, 5vw, 2.6rem);
+    font-weight: 700;
+    color: var(--beige);
+    margin-bottom: 10px;
+  }
+
+  .contact p {
+    font-size: 0.9rem;
+    color: var(--beige-deep);
+    margin-bottom: 40px;
+    font-weight: 300;
+  }
+
+  .contact-links {
+    display: flex;
+    gap: 16px;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .contact-link {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 14px 28px;
+    border-radius: 100px;
+    text-decoration: none;
+    font-size: 0.88rem;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    letter-spacing: 0.04em;
+  }
+
+  .contact-link.instagram {
+    background: var(--copper);
+    color: var(--cream);
+  }
+
+  .contact-link.email {
+    background: transparent;
+    color: var(--beige);
+    border: 1.5px solid rgba(196,122,69,0.5);
+  }
+
+  .contact-link:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 28px rgba(0,0,0,0.35);
+  }
+
+  .contact-link.email:hover {
+    border-color: var(--copper);
+    background: rgba(164,82,45,0.1);
+  }
+
+  .footer {
+    background: var(--text-brown);
+    padding: 24px;
+    text-align: center;
+  }
+
+  .footer p {
+    font-size: 0.95rem;
+    color: var(--espresso-light);
+    letter-spacing: 0.1em;
+  }
+
+  .footer span { color: var(--copper); }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes slideIn {
+    from { opacity: 0; transform: translateY(12px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes bounce {
+    0%, 100% { transform: rotate(45deg) translateY(0); }
+    50%       { transform: rotate(45deg) translateY(6px); }
+  }
+
+  /* ── MOBILE ── */
+  @media (max-width: 540px) {
+    .tab-btn { padding: 14px 6px; }
+    .tab-btn .tab-sub { display: none; }
+    .tab-panel { padding: 28px 20px; }
+    .services-grid { grid-template-columns: 1fr 1fr; }
+    .contact-links { flex-direction: column; align-items: center; }
+  }
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-grain"></div>
+
+  <div class="logo-area">
+    <div class="logo-circle">
+      <img src="WhatsApp Image 2026-05-20 at 16.24.11.jpeg" alt="AICommandHub Logo" onerror="this.style.display='none'">
+    </div>
+    <div>
+      <div class="brand-name">AI<span>Command</span>Hub</div>
+    </div>
+  </div>
+
+  <div class="hero-divider"></div>
+
+  <div class="hero-bio">
+    <h2>Building smarter digital identities<br>with the power of AI.</h2>
+    <p>Helping creators, students, and businesses transform their ideas into content, branding, and online presence through modern AI-powered solutions.</p>
+    <p>From viral content strategies and AI-generated branding to portfolio websites, productivity systems, and creative digital assets — every project is designed to stand out, grow faster, and look premium.</p>
+    <p class="highlight"style="font-size:25px;">It's about using AI creatively, strategically, and differently.</p>
+  </div>
+
+  <div class="scroll-cue">
+    <span>Explore Services</span>
+    <div class="scroll-arrow"></div>
+  </div>
+</section>
+<section class="services" id="services">
+  <div class="section-label">
+    <h3>What I Offer</h3>
+    <p>Choose your category below</p>
+    <div class="thin-line"></div>
+  </div>
+  <div class="tabs-wrapper">
+    <div class="tab-buttons" role="tablist">
+      <button class="tab-btn active" onclick="switchTab('students')" role="tab" aria-selected="true">
+        <span class="tab-icon">🎓</span>
+        <span class="tab-title">For Students</span>
+        <span class="tab-sub">AI Tools & Systems for smarter studying</span>
+      </button>
+      <button class="tab-btn" onclick="switchTab('businesses')" role="tab" aria-selected="false">
+        <span class="tab-icon">🏢</span>
+        <span class="tab-title">For Businesses</span>
+        <span class="tab-sub">Branding & Content Powered by AI</span>
+      </button>
+      <button class="tab-btn" onclick="switchTab('creators')" role="tab" aria-selected="false">
+        <span class="tab-icon">🌟</span>
+        <span class="tab-title">For Creators</span>
+        <span class="tab-sub">Grow faster with AI-assisted content</span>
+      </button>
+    </div>
+    <div class="tab-panel active" id="panel-students">
+      <div class="panel-header">
+        <span class="panel-badge">For Students</span>
+        <h2>AI Tools & Systems<br>for Smarter Studying</h2>
+        <p>Supercharge your academic life with AI-powered workflows and creative tools.</p>
+      </div>
+      <div class="services-grid">
+        <div class="service-card">
+          <div class="s-num">01</div>
+          <h4>Study Prompts</h4>
+        </div>
+        <div class="service-card">
+          <div class="s-num">02</div>
+          <h4>Resume Enhancements</h4>
+        </div>
+        <div class="service-card">
+          <div class="s-num">03</div>
+          <h4>Assignment Assistance</h4>
+        </div>
+        <div class="service-card">
+          <div class="s-num">04</div>
+          <h4>Presentation Ideas</h4>
+        </div>
+        <div class="service-card">
+          <div class="s-num">05</div>
+          <h4>AI Productivity Systems</h4>
+        </div>
+      </div>
+      <div class="panel-cta">
+        <p>Custom solutions. Creative execution. Affordable pricing.</p>
+        <a href="https://instagram.com/aicommandhub_official" target="_blank" class="cta-dm">DM to discuss your project ✨</a>
+      </div>
+    </div>
+    <div class="tab-panel" id="panel-businesses">
+      <div class="panel-header">
+        <span class="panel-badge">For Businesses</span>
+        <h2>Branding & Content<br>Powered by AI</h2>
+        <p>Premium AI-driven branding assets that make your business unforgettable.</p>
+      </div>
+      <div class="services-grid">
+        <div class="service-card">
+          <div class="s-num">01</div>
+          <h4>Brand Pfp's & Logos</h4>
+        </div>
+        <div class="service-card">
+          <div class="s-num">02</div>
+          <h4>Brand Taglines</h4>
+        </div>
+        <div class="service-card">
+          <div class="s-num">03</div>
+          <h4>Brand Bio's</h4>
+        </div>
+        <div class="service-card">
+          <div class="s-num">04</div>
+          <h4>AI Posters & Banners</h4>
+        </div>
+        <div class="service-card">
+          <div class="s-num">05</div>
+          <h4>Product Descriptions</h4>
+        </div>
+        <div class="service-card">
+          <div class="s-num">06</div>
+          <h4>Festival Creatives</h4>
+        </div>
+      </div>
+      <div class="panel-cta">
+        <p>Custom solutions. Creative execution. Affordable pricing.</p>
+        <a href="https://instagram.com/aicommandhub_official" target="_blank" class="cta-dm">DM to discuss your project ✨</a>
+      </div>
+    </div>
+    <div class="tab-panel" id="panel-creators">
+      <div class="panel-header">
+        <span class="panel-badge">For Creators</span>
+        <h2>Grow Faster with<br>AI-Assisted Content</h2>
+        <p>Stand out, go viral, and build an audience with AI-crafted creative strategies.</p>
+      </div>
+      <div class="services-grid">
+        <div class="service-card">
+          <div class="s-num">01</div>
+          <h4>AI Content Planning & Ideas</h4>
+        </div>
+        <div class="service-card">
+          <div class="s-num">02</div>
+          <h4>Instagram Story & Post Captions</h4>
+        </div>
+        <div class="service-card">
+          <div class="s-num">03</div>
+          <h4>Reel Hooks</h4>
+        </div>
+        <div class="service-card">
+          <div class="s-num">04</div>
+          <h4>Customized Bio Ideas</h4>
+        </div>
+      </div>
+      <div class="panel-cta">
+        <p>Custom solutions. Creative execution. Affordable pricing.</p>
+        <a href="https://instagram.com/aicommandhub_official" target="_blank" class="cta-dm">DM to discuss your project ✨</a>
+      </div>
+    </div>
+
+  </div>
+</section>
+<section class="contact" id="contact">
+  <div class="thin-line" style="margin-bottom:32px;"></div>
+  <h3>Let's Work Together</h3>
+  <p>Have a project in mind? Reach out and let's build something premium.</p>
+  <div class="contact-links">
+    <a href="https://instagram.com/aicommandhub_official" target="_blank" class="contact-link instagram">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+      Instagram
+    </a>
+    <a href="mailto:info.aicommandhub@gmail.com" class="contact-link email">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+      Email Me
+    </a>
+  </div>
+</section>
+
+<footer class="footer">
+  <p> <span>"Turning AI Into Impact"</span></p>
+</footer>
+
+<script>
+  // Switch tabs
+  function switchTab(tab) {
+
+    // Button active state
+    document.querySelectorAll('.tab-btn').forEach(btn => {
+      btn.classList.remove('active');
+      btn.setAttribute('aria-selected', 'false');
+    });
+
+    event.currentTarget.classList.add('active');
+    event.currentTarget.setAttribute('aria-selected', 'true');
+
+    // Panel switching
+    document.querySelectorAll('.tab-panel').forEach(panel => {
+      panel.classList.remove('active');
+    });
+
+    document
+      .getElementById('panel-' + tab)
+      .classList.add('active');
+  }
+
+
+  // Scroll reveal animation
+  const observer = new IntersectionObserver((entries) => {
+
+    entries.forEach(entry => {
+
+      if (entry.isIntersecting) {
+
+        entry.target.style.animation =
+          'fadeUp 0.6s ease forwards';
+
+        observer.unobserve(entry.target);
+
+      }
+
+    });
+
+  }, {
+    threshold: 0.1
+  });
+
+
+  // Observe cards
+  document
+    .querySelectorAll('.service-card')
+    .forEach(card => {
+
+      observer.observe(card);
+
+    });
+
+</script>
+</body>
+</html>
